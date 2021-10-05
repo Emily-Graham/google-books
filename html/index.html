@@ -17,14 +17,29 @@
   <!-- header to introduce page -->
   <header>
     <h1>Shelf Search</h1>
+    <div id="search" class="searchBar__container">
+      <!-- form must include search bar, submit/button -->
+      <form class="searchBar__form" action="POST">
+        <!-- type of search -->
+        <select name="searchType" id="searchType" class="searchBar__select">
+          <option value="title" >Title</option>
+          <option value="author">Author</option>
+          <option value="subject">Subject</option>
+          <option value="publisher">Publisher</option>
+        </select>
+        <!-- submit via 'enter' key -->
+        <input name="searchPhrase" type="text" placeholder="Find your next read:" class="searchBar__textInput">
+
+        <!-- submit via button-->
+        <button type="submit" class="searchBar__submit"><img src="./../media/searchIcon.svg" alt="search button"></button>
+      </form>
+    </div>
   </header>
 
   <!-- main -->
   <main>
 
-    <!-- form must include search bar, submit/button -->
-    <form action="POST">
-    </form> 
+    
 
     <!-- My Shelf -->
 

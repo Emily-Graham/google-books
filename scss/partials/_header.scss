@@ -1,0 +1,75 @@
+@use "./typography" as t;
+@use "./palette" as p;
+@use "./mixins" as m;
+
+header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  @include m.height-width(180px, 100vw);
+  background-color: p.$blocks;
+  border-radius: 0px 0px 20px 20px;
+}
+
+h1 {
+  color: p.$white;
+  font-family: t.$title;
+  font-size: 2rem;
+}
+
+.searchBar {
+  &__container {
+    display: flex;
+    position: relative;
+    @include m.height-width(45px, 60vw);
+    background-color: p.$searchBar;
+    border-radius: 15px;
+  }
+
+  &__form {
+    display: flex;
+    @include m.height-width(100%, 100%);
+  }
+
+  &__select {
+    display: flex;
+    justify-content: center;
+    padding: 0px 0px 0px 20px;
+    @include m.height-width(100%, auto);
+    min-width: 25%;
+    font-family: t.$text;
+    color: p.$offWhite;
+    background-color: p.$selectOptions;
+    border: none;
+    border-radius: 15px;
+
+    &:focus-visible {
+      outline: none;
+    }
+
+  }
+
+  &__textInput {
+    display: flex;
+    justify-content: center;
+    padding: 0px 0px 0px 20px;
+    @include m.height-width(100%, 100%);
+    font-family: t.$text;
+    border: none;
+    color: p.$white;
+    background-color: transparent;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__submit {
+    padding: 0px 10px;
+    @include m.height-width(100%, auto);
+    color: none;
+    background-color: transparent;
+    border: none;
+    border-radius: 15px;
+  }
+}

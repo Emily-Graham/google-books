@@ -1,10 +1,14 @@
 @use "./partials/typography" as t;
+@use "./partials/palette" as p;
+@use "./partials/mixins" as m;
 
 @import "./partials/reset";
+@import "./partials/header";
 
-h1 {
-  font-family: t.$title;
+body {
+  background-color: p.$background;
 }
+
 
 // This application should look good, take some time to pick a palette and plan out your design. You can use tools like Figma or wireframe pro to plan what your application is going to look like.
 // Styling must use BEM, and each block should have its own SCSS file
