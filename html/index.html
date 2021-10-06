@@ -11,11 +11,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
   <!-- javaScript links -->
   <script src="./../javaScript/script.js" defer></script>
-  <title>Pocket Search</title>
+  <title>Shelf Search</title>
 </head>
+
+<!-- body -->
 <body>
+
   <!-- header to introduce page -->
   <header>
+    <!-- title -->
     <h1>Shelf Search</h1>
     <div id="search" class="searchBar__container">
       <!-- form must include search bar, submit/button -->
@@ -27,11 +31,15 @@
           <option value="subject">Subject</option>
           <option value="publisher">Publisher</option>
         </select>
-        <!-- submit via 'enter' key -->
-        <input name="searchPhrase" type="text" placeholder="Find your next read:" class="searchBar__textInput">
 
-        <!-- submit via button-->
-        <button type="submit" class="searchBar__submit"><img src="./../media/searchIcon.svg" alt="search button"></button>
+        <!-- search and submit container -->
+        <div class="searchBar__search-button-container">
+          <!-- submit via 'enter' key -->
+          <input name="searchPhrase" type="text" placeholder="Find your next read:" class="searchBar__textInput">
+
+          <!-- submit via button-->
+          <button type="submit" class="searchBar__submit"><img class="searchBar__icon" src="./../media/searchIcon.svg" alt="search button"></button>
+        </div>
       </form>
     </div>
   </header>
@@ -39,12 +47,14 @@
   <!-- main -->
   <main>
 
-    
+    <!-- Saved Bookshelf -->
+    <div class="savedShelf__container">
 
+    </div>
     <!-- My Shelf -->
 
     <!-- A grid of search result books -->
-    <div>
+    <div class="resultsDisplay__container">
     </div>
 
   </main>

@@ -1,0 +1,14 @@
+@use "./typography" as t;
+@use "./palette" as p;
+@use "./mixins" as m;
+@use "./variables" as v;
+@use "./mediaQueries" as mQ;
+
+.savedShelf {
+  &__container {
+    margin: 40px 0px;
+    @include m.height-width(240px, 80vw);
+    background-color: p.$blocks;
+    border-radius: 20px;
+  }
+}

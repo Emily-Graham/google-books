@@ -2,3 +2,8 @@
   height: $height;
   width: $width;  
 }
+
+@mixin color-background ($color, $background) {
+  color: $color;
+  background-color: $background;
+}

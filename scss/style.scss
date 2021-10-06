@@ -1,15 +1,28 @@
 @use "./partials/typography" as t;
 @use "./partials/palette" as p;
 @use "./partials/mixins" as m;
-
-@import "./partials/reset";
-@import "./partials/header";
+@use "./partials/variables" as v;
+@use "./partials/mediaQueries" as mQ;
 
 body {
   background-color: p.$background;
+  @include m.height-width(100vh, 100vw);
 }
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@import "./partials/reset";
+@import "./partials/header";
+@import "./partials/savedShelf";
+@import "./partials/results";
 
 
 // This application should look good, take some time to pick a palette and plan out your design. You can use tools like Figma or wireframe pro to plan what your application is going to look like.
 // Styling must use BEM, and each block should have its own SCSS file
 // Your palette should use variables
+
+// https://www.figma.com/file/yeMfLVakTRFSBXW97XrTly/Shelf-Search?node-id=0%3A1 
