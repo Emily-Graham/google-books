@@ -1,0 +1,16 @@
+@mixin height-width ($height, $width) {
+  height: $height;
+  width: $width;  
+}
+
+@mixin color-background ($color, $background) {
+  color: $color;
+  background-color: $background;
+}
+
+@mixin font-fam-siz-wei-col ($family, $size, $weight, $color) {
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
