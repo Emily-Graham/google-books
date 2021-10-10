@@ -1,34 +1,76 @@
 @use "./typography" as t;
 @use "./palette" as p;
 @use "./mixins" as m;
+@use "./variables" as v;
+@use "./mediaQueries" as mQ;
 
 header {
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  @include m.height-width(180px, 100vw);
+  padding: 0px 10vw;
+  @include m.height-width(15vh, 100vw);
   background-color: p.$blocks;
   border-radius: 0px 0px 20px 20px;
+
+  @include mQ.query-phone {
+    @include m.height-width(20vh, 100vw);
+    justify-content: space-evenly;
+    padding: 0px;
+  }
 }
 
 h1 {
+  display: flex;
   color: p.$white;
   font-family: t.$title;
   font-size: 2rem;
+  
+  @include mQ.query-phone {
+    font-size: 1.3rem;
+    @include m.height-width(auto, 90px);
+  }
 }
 
 .searchBar {
   &__container {
     display: flex;
+    flex-direction: row;
     position: relative;
-    @include m.height-width(45px, 60vw);
+    @include m.height-width(35px, 60vw);
+    max-width: 700px;
     background-color: p.$searchBar;
     border-radius: 15px;
+
+    @include mQ.query-phone {
+      flex-direction: column;
+      justify-content: center;
+      @include m.height-width(100%, 60vw);
+      background-color: transparent;
+    }
   }
 
   &__form {
     display: flex;
     @include m.height-width(100%, 100%);
+
+    @include mQ.query-phone {
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+
+  &__search-button-container {
+    display: flex;
+    @include m.height-width(100%, 100%);
+    background-color: p.$searchBar;
+    border-radius: 15px;
+
+    @include mQ.query-phone {
+      margin: 5px 0px 0px 0px;
+      @include m.height-width(30px, 100%);
+    }
   }
 
   &__select {
@@ -38,8 +80,7 @@ h1 {
     @include m.height-width(100%, auto);
     min-width: 25%;
     font-family: t.$text;
-    color: p.$offWhite;
-    background-color: p.$selectOptions;
+    @include m.color-background(p.$offWhite, p.$selectOptions);
     border: none;
     border-radius: 15px;
 
@@ -47,17 +88,19 @@ h1 {
       outline: none;
     }
 
+    @include mQ.query-phone {
+      @include m.height-width(30px, 100%);
+    }
   }
 
   &__textInput {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 0px 0px 0px 20px;
     @include m.height-width(100%, 100%);
     font-family: t.$text;
-    border: none;
-    color: p.$white;
-    background-color: transparent;
+    @include m.color-background(p.$white, transparent);border: none;
 
     &:focus-visible {
       outline: none;
@@ -67,9 +110,16 @@ h1 {
   &__submit {
     padding: 0px 10px;
     @include m.height-width(100%, auto);
-    color: none;
-    background-color: transparent;
+    @include m.color-background(transparent, transparent);
     border: none;
     border-radius: 15px;
+  }
+
+  &__icon {
+    @include m.height-width(20px, 20px);
+
+    @include mQ.query-phone {
+      @include m.height-width(20px, 20px);
+    }
   }
 }

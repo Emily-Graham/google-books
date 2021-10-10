@@ -1,0 +1,163 @@
+@use "./typography" as t;
+@use "./palette" as p;
+@use "./mixins" as m;
+@use "./variables" as v;
+@use "./mediaQueries" as mQ;
+
+#return {
+  grid-area: return;
+}
+
+.modal {
+  position: relative;
+  background-color: p.$background;
+  @include m.height-width(750px, 400px);
+  overflow: hidden;
+  margin: auto;
+  border-radius: 20px;
+
+  @include mQ.query-phone{
+    @include m.height-width(100vh, 100vw);
+    border-radius: 0px;
+  }
+
+  &__background {
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include m.height-width(100vh, 100vw);
+    background-color: p.$modalBackground;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  &__topContainer {
+    position: absolute;
+    top: 0px;
+    box-sizing: border-box;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    grid-template-rows: 1fr 9fr;
+    grid:
+      "return titles icons"
+      ". bookCover .";
+    @include m.height-width(58%, 100%);
+  }
+
+  &__titleContainer {
+    grid-area: titles;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+  }
+  
+  &__bookTitle {
+    text-align: center;
+    @include m.font-fam-siz-wei-col(t.$text, 1.4rem, bold, p.$white);
+
+    @include mQ.query-phone {
+      @include m.font-fam-siz-wei-col(t.$text, 1rem, bold, p.$white);
+    }
+  }
+
+  &__booksubtitle {
+    @include m.font-fam-siz-wei-col(t.$text, 1rem, normal, p.$white);
+
+    @include mQ.query-phone {
+      font-size: 0.7rem;
+    }
+  }
+
+  &__bookAuthor {
+    @include m.font-fam-siz-wei-col(t.$text, 1rem, normal, p.$offWhite);
+
+    @include mQ.query-phone {
+      font-size: 0.7rem;
+    }
+  }
+
+  &__iconContainer {
+    grid-area: icons;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__bookCover {
+    grid-area: bookCover;
+    margin: auto;
+    @include m.height-width(auto, 55%);
+    border-radius: 10px;
+    filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.6));
+  }
+
+  &__informationContainer {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    @include m.height-width(40%, 100%);
+  }
+
+  &__tab {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0px 0px 0px;
+    @include m.height-width(50px, 120px);
+    @include m.font-fam-siz-wei-col(t.$text, 0.8rem, bold, p.$white);
+    background-color: p.$searchBar;
+    border-radius: 20px 20px 0px 0px;
+
+    &--selected {
+      background-color: p.$blocks;
+    }
+  }
+
+  &__displayBlock {
+
+    position: absolute;
+    bottom: 0px;
+    z-index: 5;
+    display: hidden;
+    box-sizing: border-box;
+    @include m.height-width(90%, 100%);
+    background-color: p.$blocks;
+    border-radius: 20px;
+
+    &--1 {
+      padding: 30px;
+    }
+    &--2 {
+    padding: 30px;
+    }
+    &--selected {
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__descriptionContainer {
+    box-sizing: border-box;
+    padding: 0px 50px 0px 0px;
+    overflow-y: scroll;
+    @include m.height-width(100%, 100%);
+    @include m.font-fam-siz-wei-col(t.$text, 1rem, normal, p.$white);
+
+    @include mQ.query-phone {
+      font-size: 0.7rem;
+    }
+  }
+}

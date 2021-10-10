@@ -10,41 +10,62 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
   <!-- javaScript links -->
-  <script src="./../javaScript/script.js" defer></script>
-  <title>Pocket Search</title>
+  <script type="module" src="./../javaScript/index.js" defer></script>
+  <script type="module" src="./../javaScript/savedShelf.js" defer></script>
+  <title>Shelf Search</title>
 </head>
+
+<!-- body -->
 <body>
+
   <!-- header to introduce page -->
   <header>
+    <!-- title -->
     <h1>Shelf Search</h1>
     <div id="search" class="searchBar__container">
       <!-- form must include search bar, submit/button -->
-      <form class="searchBar__form" action="POST">
+      <form class="searchBar__form" >
         <!-- type of search -->
         <select name="searchType" id="searchType" class="searchBar__select">
-          <option value="title" >Title</option>
-          <option value="author">Author</option>
-          <option value="subject">Subject</option>
-          <option value="publisher">Publisher</option>
+          <option value="intitle:" >Title</option>
+          <option value="inauthor:">Author</option>
+          <option value="subject:">Subject</option>
+          <option value="inpublisher:">Publisher</option>
+          <option value="">Anywhere</option>
         </select>
-        <!-- submit via 'enter' key -->
-        <input name="searchPhrase" type="text" placeholder="Find your next read:" class="searchBar__textInput">
 
-        <!-- submit via button-->
-        <button type="submit" class="searchBar__submit"><img src="./../media/searchIcon.svg" alt="search button"></button>
+        <!-- search and submit container -->
+        <div class="searchBar__search-button-container">
+          <!-- submit via 'enter' key -->
+          <input name="searchPhrase" type="text" placeholder="Find your next read:" class="searchBar__textInput">
+
+          <!-- submit via button-->
+          <button type="submit" class="searchBar__submit"><img class="searchBar__icon" src="./../media/searchIcon.svg" alt="search button"></button>
+        </div>
       </form>
     </div>
   </header>
 
+  <!-- modal -->
+  <div class="modal__background modal__background--hidden">
+  </div>
+
   <!-- main -->
   <main>
 
-    
-
-    <!-- My Shelf -->
+    <!-- Saved Bookshelf -->
+    <div class="savedShelf__container">
+      <div class="savedShelf__bookContainer">
+      </div>
+    </div>
 
     <!-- A grid of search result books -->
-    <div>
+    
+    <div class="resultsDisplay__container">
+      <h4 class="resultsDisplay__title">You haven't looked for anything yet</h4>
+      <!-- search results go here -->
+      <div class="resultsDisplay__bookContainer">
+      </div>
     </div>
 
   </main>
@@ -78,10 +99,3 @@ Always parametrize and abstract large pieces of duplicate code.
 Bonus (optional, but highly recommended):
 Give feedback to the user when no book results can be found for the query.
 When a user clicks a book in the grid, a modal should appear with more book information, think about release, publish date, country, languages, etc.
-
-Resources:
-Fetch API
-Using JavaScript Fetch API to get data
-Google Books Documentation
-Async / Await Requests Example |TODO|
-Fetch documentation -->
