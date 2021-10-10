@@ -5,6 +5,7 @@
 @use "./partials/mediaQueries" as mQ;
 
 body {
+  position: relative;
   background-color: p.$background;
 }
 
@@ -26,6 +27,7 @@ main {
 @import "./partials/results";
 @import "./partials/icons";
 @import "./partials/scrollbars";
+@import "./partials/modal";
 
 
 // This application should look good, take some time to pick a palette and plan out your design. You can use tools like Figma or wireframe pro to plan what your application is going to look like.

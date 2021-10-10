@@ -1,14 +1,20 @@
 .icon {
-  &__save {
+  &--default {
     display: inline;
+    @include m.height-width(24px, 24px);
+    padding: 0px 0px 10px 0px;
     cursor: pointer;
-    
-    &--saved {
-      display: inline;
-    }
-
-    &--hidden {
-    display: none;
-    }
+  }
+  &--activated {
+    display: inline;
+  }
+  &--hover {
+    display: inline;
+  }
+  &--hidden {
+  display: none;
+  }
+  &--return {
+    @include m.height-width(14px, auto);
   }
 }

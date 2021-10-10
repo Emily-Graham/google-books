@@ -1,4 +1,5 @@
 body {
+  position: relative;
   background-color: #252525;
 }
 
@@ -159,7 +160,7 @@ h1 {
 
 .savedShelf__container {
   box-sizing: border-box;
-  padding: 0px 75px;
+  padding: 0px 75px 10px 75px;
   height: 25vh;
   width: 80vw;
   background-color: #0c0c0c;
@@ -178,7 +179,7 @@ h1 {
 }
 .savedShelf__bookContainer {
   box-sizing: border-box;
-  padding: 20px 0px;
+  padding: 20px 0px 10px 0px;
   overflow-x: scroll;
   height: 100%;
   width: 100%;
@@ -374,15 +375,25 @@ h1 {
   color: #ffffff;
 }
 
-.icon__save {
+.icon--default {
   display: inline;
+  height: 24px;
+  width: 24px;
+  padding: 0px 0px 10px 0px;
   cursor: pointer;
 }
-.icon__save--saved {
+.icon--activated {
   display: inline;
 }
-.icon__save--hidden {
+.icon--hover {
+  display: inline;
+}
+.icon--hidden {
   display: none;
+}
+.icon--return {
+  height: 14px;
+  width: auto;
 }
 
 * {
@@ -393,14 +404,187 @@ h1 {
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 *::-webkit-scrollbar-track {
   background: #252525;
+  border-radius: 20px;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: #9DACF5;
   border-radius: 20px;
   border: none;
+}
+
+#return {
+  grid-area: return;
+}
+
+.modal {
+  position: relative;
+  background-color: #252525;
+  height: 750px;
+  width: 400px;
+  overflow: hidden;
+  margin: auto;
+  border-radius: 20px;
+}
+@media only screen and (max-width: 576px) {
+  .modal {
+    height: 100vh;
+    width: 100vw;
+    border-radius: 0px;
+  }
+}
+.modal__background {
+  position: fixed;
+  z-index: 2;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.modal__background--hidden {
+  display: none;
+}
+.modal__topContainer {
+  position: absolute;
+  top: 0px;
+  box-sizing: border-box;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  grid-template-rows: 1fr 9fr;
+  grid: "return titles icons" ". bookCover .";
+  height: 58%;
+  width: 100%;
+}
+.modal__titleContainer {
+  grid-area: titles;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+.modal__bookTitle {
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+@media only screen and (max-width: 576px) {
+  .modal__bookTitle {
+    font-family: "Raleway", sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+  }
+}
+.modal__booksubtitle {
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #ffffff;
+}
+@media only screen and (max-width: 576px) {
+  .modal__booksubtitle {
+    font-size: 0.7rem;
+  }
+}
+.modal__bookAuthor {
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #d8d8d8;
+}
+@media only screen and (max-width: 576px) {
+  .modal__bookAuthor {
+    font-size: 0.7rem;
+  }
+}
+.modal__iconContainer {
+  grid-area: icons;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.modal__bookCover {
+  grid-area: bookCover;
+  margin: auto;
+  height: auto;
+  width: 55%;
+  border-radius: 10px;
+  filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.6));
+}
+.modal__informationContainer {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  height: 40%;
+  width: 100%;
+}
+.modal__tab {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0px 0px 0px;
+  height: 50px;
+  width: 120px;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #393939;
+  border-radius: 20px 20px 0px 0px;
+}
+.modal__tab--selected {
+  background-color: #0c0c0c;
+}
+.modal__displayBlock {
+  position: absolute;
+  bottom: 0px;
+  z-index: 5;
+  display: hidden;
+  box-sizing: border-box;
+  height: 90%;
+  width: 100%;
+  background-color: #0c0c0c;
+  border-radius: 20px;
+}
+.modal__displayBlock--1 {
+  padding: 30px;
+}
+.modal__displayBlock--2 {
+  padding: 30px;
+}
+.modal__displayBlock--selected {
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal__descriptionContainer {
+  box-sizing: border-box;
+  padding: 0px 50px 0px 0px;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #ffffff;
+}
+@media only screen and (max-width: 576px) {
+  .modal__descriptionContainer {
+    font-size: 0.7rem;
+  }
 }

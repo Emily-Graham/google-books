@@ -6,10 +6,13 @@
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
+  
 }
 
 *::-webkit-scrollbar-track {
   background: p.$background;
+  border-radius: 20px;
 }
 
 *::-webkit-scrollbar-thumb {

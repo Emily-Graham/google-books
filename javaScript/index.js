@@ -12,6 +12,14 @@ const resetSearchBar = () => {
   userInput.value = ""; 
 }
 
+// GET BOOK DATA
+const getBook = async (bookId) => {
+  const google_url = `https://www.googleapis.com/books/v1/volumes/${bookId}`;
+  const response = await fetch(google_url); 
+  const data = await response.json(); //convert to objects
+  return data;
+}
+
 //CONVERT USER INPUT TO SEARCH STRING
 const convertToSearchString = (userInput, searchParameter) => {
   let display = "";
@@ -50,9 +58,8 @@ const createList = async (searchTerm, searchParameter) => {
  
   //extract data
   await getVolumes(searchTerm, searchParameter)
-    .then((n) => { 
-      console.log(n.items[0])
-      n.items.forEach(item => {
+    .then((data) => { 
+      data.items.forEach(item => {
         //card inputs
         let image = ``;
         const id = item.id;
@@ -91,7 +98,7 @@ const createList = async (searchTerm, searchParameter) => {
         || item.volumeInfo.description.match(/complete series/)) { 
           console.log(`box set triggered!`);
           return; 
-        //passed conditions
+        //passed conditions!
         } else {
           item.volumeInfo.imageLinks.large ? image = item.volumeInfo.imageLinks.large : image = item.volumeInfo.imageLinks.thumbnail;
 
@@ -101,9 +108,9 @@ const createList = async (searchTerm, searchParameter) => {
               <img class ="resultsDisplay__bookCover" src="${image}" alt="book cover">
               <div class="resultsDisplay__bookText">
                 <button class="resultsDisplay__add">
-                  <img class="icon__save" src="./../media/Add.svg" alt="Add">
-                  <img class="icon__save icon__save--hover icon__save--hidden" src="./../media/add--hover.svg" alt="Add">
-                  <img class="icon__save icon__save--hidden icon__save--saved" src="./../media/add--saved.svg" alt="Saved">
+                  <img class="icon--default" src="./../media/Add.svg" alt="Add">
+                  <img class="icon--hover icon--hidden" src="./../media/add--hover.svg" alt="Add">
+                  <img class="icon--actived icon--hidden" src="./../media/add--saved.svg" alt="Saved">
                 </button>
                 <div class="resultsDisplay__titleContainer">
                   <h3 class="resultsDisplay__bookTitle">${title}</h3>
@@ -121,10 +128,83 @@ const createList = async (searchTerm, searchParameter) => {
       resultsContainer.innerHTML = `<h3 class="resultsDisplay__searchFail" >No results found</h3>`;
       console.log(n);
     })
-    if (!resultsContainer.innerHTML) {
-      resultsContainer.innerHTML = `<h3 class="resultsDisplay__searchFail" >No results found</h3>`;
+  if (!resultsContainer.innerHTML) {
+    resultsContainer.innerHTML = `<h3 class="resultsDisplay__searchFail" >No results found</h3>`;
+  }
+  //event listeners for cards
+  document.querySelectorAll(".resultsDisplay__card").forEach((card) => card.addEventListener("click", (event) => {
+    console.log(`Clicked! ${event.currentTarget.id}`);
+    openModal(event.currentTarget.id);
+  }));
+}
+
+// OPEN MODAL 
+const openModal = async (bookId) => {
+  const id = bookId;
+  
+  //get book data
+  await getBook(id)
+  .then((data) => {
+    const info = data.volumeInfo;
+    let image = info.imageLinks.thumbnail;
+    let title = info.title;
+    let author =  ``;
+    let subtitle = ``;
+    let description = info.description;
+    console.log(image);
+    if (info.imageLinks.hasOwnProperty("large")) {
+      image = info.imageLinks.large;
+    } else if (info.imageLinks.hasOwnProperty("extraLarge")) {
+      image = info.imageLinks.extraLarge;
     }
-  console.log('end of current createList function'); //delete later
+    if (/\(/.test(title)) {
+      subtitle = title.slice(title.search(/\(/));
+      title = title.slice(0, title.search(/\(/));
+    }
+    if (info.authors) {
+      author = info.authors.join(", "); 
+    }
+
+    console.log(image);
+    document.querySelector(".modal__background").innerHTML = 
+      `<div class="modal">
+        <div class="modal__topContainer">
+          <img id="return" class="icon--return" src="./../media/left-arrow.svg" alt="return">
+          <div class="modal__iconContainer">
+            <img  class="icon--default" src="./../media/Add.svg" alt="add">
+            <img class="icon--activated icon--hidden" src="./../media/add--saved.svg" alt="saved">
+            <img class="icon--hover icon--hidden" src="./../media/add--hover.svg" alt="add">
+            <img class="icon--default" src="./../media/remove.svg" alt="remove">
+            <img class="icon--hover icon--hidden" src="./../media/remove--hover.svg" alt="remove">
+          </div>
+          <div class="modal__titleContainer">
+            <h3 class="modal__bookTitle">${title}</h3>
+            ${subtitle ? `<h4 class="modal__booksubtitle">${subtitle}</h4>` : ``}
+            <h4 class="modal__bookAuthor">${author}</h4>
+          </div>
+          <img class="modal__bookCover" src="${image}" alt="book cover">
+        </div>
+        <div class="modal__informationContainer">
+          <div class="modal__tab modal__tab--1 modal__tab--selected">Description</div>
+          <div class="modal__tab modal__tab--2">More</div>
+          <div class="modal__displayBlock modal__displayBlock--1 modal__displayBlock--selected">
+            <div class="modal__descriptionContainer">${description}</div>
+          </div>
+          <div class="modal__displayBlock modal__displayBlock--2">
+          </div>
+        </div>
+      </div>`;
+    document.querySelector(".modal__background").classList.remove("modal__background--hidden");
+  })
+  .catch((n) => {
+    throw new Error(`something went wrong: ${n}`);
+  })
+
+  document.querySelector("#return").addEventListener("click", (event) => {
+    event.preventDefault();
+    document.querySelector(".modal__background").innerHTML = ``;
+    document.querySelector(".modal__background").classList.add("modal__background--hidden");
+  })
 }
 
 //EVENT LISTENER
