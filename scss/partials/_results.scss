@@ -8,7 +8,7 @@
   &__container {
     display: flex;
     box-sizing: border-box;
-    padding: 80px 75px 20px 20px;
+    padding: 80px 20px 20px 20px;
     @include m.height-width(50vh, 80vw);
     background-color: p.$blocks;
     border-radius: 20px;
@@ -20,11 +20,14 @@
   }
 
   &__bookContainer {
-    display: grid;
+    // display: grid;
+    display: flex;
+    flex-wrap: wrap;
     box-sizing: border-box;
-    grid-template-columns: repeat(2, 50%);
-    grid-template-rows: auto;
-    gap: 20px 30px;
+    justify-content: space-evenly;
+    // grid-template-columns: repeat(2, 50%);
+    // grid-template-rows: auto;
+    // gap: 20px 30px;
     overflow-x: hidden;
     overflow-y: scroll;
     padding: 15px 0px 0px 10px;
@@ -39,8 +42,9 @@
     position: relative;
     box-sizing: border-box;
     background-color: p.$background;
-    @include m.height-width(250px, 100%);
+    @include m.height-width(250px, 30%);
     border-radius: 10px;
+    margin: 0px 0px 30px 10px;
 
     &:hover {
       cursor: pointer;
@@ -67,6 +71,7 @@
   &__bookCover {
     height: 255px;
     width: auto;
+    max-width: 175px;
     border-radius: 10px;
     filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.6));
 
@@ -136,5 +141,9 @@
     @include mQ.query-phone {
       font-size: 0.7rem;
     }
+  }
+
+  &__searchFail {
+    @include m.font-fam-siz-wei-col(t.$text, 1rem, normal, p.$white);
   }
 }
