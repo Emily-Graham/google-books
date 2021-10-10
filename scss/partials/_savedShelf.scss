@@ -11,7 +11,6 @@
     @include m.height-width(25vh, 80vw);
     background-color: p.$blocks;
     border-radius: 20px;
-    overflow-x: scroll;
     @include mQ.query-phone{
       padding: 0px 30px;
       @include m.height-width(25vh, 100vw);
@@ -25,9 +24,9 @@
   &__bookContainer {
     box-sizing: border-box;
     padding: 20px 0px;
-    overflow: hidden;
+    overflow-x: scroll;
     @include m.height-width(100%, 100%);
-
+    
     &__toggleOff {
       display: none;
     }

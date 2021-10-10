@@ -5,6 +5,7 @@ const form = document.querySelector(".searchBar__form");
 const parameterType = document.querySelector("select");
 const userInput = document.querySelector(".searchBar__textInput");
 const resultsContainer = document.querySelector(".resultsDisplay__bookContainer");
+const resultTitle = document.querySelector(".resultsDisplay__title");
 
 //RESET
 const resetSearchBar = () => {
@@ -13,6 +14,7 @@ const resetSearchBar = () => {
 
 //CONVERT USER INPUT TO SEARCH STRING
 const convertToSearchString = (userInput, searchParameter) => {
+  let display = "";
   if (!userInput) {
     return;
   } else if (!/[^ +]/g.test(userInput)) {
@@ -23,6 +25,22 @@ const convertToSearchString = (userInput, searchParameter) => {
       .replace(/[^a-z A-Z\d\&\!\#]/g, "") //delete special characters?
       .replace(/ +/g, "+"); //replace spaces with +
     createList(searchTerm, searchParameter);
+    switch (searchParameter) {
+      case "intitle:":
+        display = "&nbsp;<u>Titles</u>:"
+        break;
+      case "inauthor:":
+        display = "&nbsp;<u>Authors</u>:";
+        break;
+      case "subject:":
+        display = "&nbsp;<u>Subject</u>:";
+        break;
+      case "inpublisher:":
+        display = "&nbsp;<u>Publishers</u>:";
+      default:
+        display = ":";
+    }
+    resultTitle.innerHTML = `Results for${display} ${userInput.trim()}`;
   }
 }
 
@@ -75,8 +93,7 @@ const createList = async (searchTerm, searchParameter) => {
           return; 
         //passed conditions
         } else {
-        
-          image = item.volumeInfo.imageLinks.thumbnail;
+          item.volumeInfo.imageLinks.large ? image = item.volumeInfo.imageLinks.large : image = item.volumeInfo.imageLinks.thumbnail;
 
           resultsContainer.innerHTML +=
           `<div id="${id}" class="resultsDisplay__card">
@@ -104,7 +121,9 @@ const createList = async (searchTerm, searchParameter) => {
       resultsContainer.innerHTML = `<h3 class="resultsDisplay__searchFail" >No results found</h3>`;
       console.log(n);
     })
-
+    if (!resultsContainer.innerHTML) {
+      resultsContainer.innerHTML = `<h3 class="resultsDisplay__searchFail" >No results found</h3>`;
+    }
   console.log('end of current createList function'); //delete later
 }
 
@@ -117,9 +136,4 @@ form.addEventListener("submit", (event) => {
 
 
 // You should separate DOM functions and non-DOM functions in different modules Example: https://github.com/chillcaw/el-salvador-code-alongs/tree/master/js-modules
-// Write as many non-DOM functions as you can
-// Functions should do 1 thing, and should be as pure and reusable as possible
-// Always use iterators over loops
 // Always parametrize and abstract large pieces of duplicate code.
-// Bonus (optional, but highly recommended):
-// Give feedback to the user when no book results can be found for the query.
