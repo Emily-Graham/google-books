@@ -1,0 +1,14 @@
+.icon {
+  &__save {
+    display: inline;
+    cursor: pointer;
+    
+    &--saved {
+      display: inline;
+    }
+
+    &--hidden {
+    display: none;
+    }
+  }
+}

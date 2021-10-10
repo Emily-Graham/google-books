@@ -6,9 +6,30 @@
 
 .savedShelf {
   &__container {
-    margin: 40px 0px;
-    @include m.height-width(240px, 80vw);
+    box-sizing: border-box;
+    padding: 0px 75px;
+    @include m.height-width(25vh, 80vw);
     background-color: p.$blocks;
     border-radius: 20px;
+    overflow-x: scroll;
+    @include mQ.query-phone{
+      padding: 0px 30px;
+      @include m.height-width(25vh, 100vw);
+    }
+
+    &--toggleOff {
+      @include m.height-width(5vh, 80vw);
+    }
+  }
+
+  &__bookContainer {
+    box-sizing: border-box;
+    padding: 20px 0px;
+    overflow: hidden;
+    @include m.height-width(100%, 100%);
+
+    &__toggleOff {
+      display: none;
+    }
   }
 }

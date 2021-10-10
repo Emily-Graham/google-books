@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
   <!-- javaScript links -->
-  <script src="./../javaScript/script.js" defer></script>
+  <script type="module" src="./../javaScript/index.js" defer></script>
   <title>Shelf Search</title>
 </head>
 
@@ -23,13 +23,14 @@
     <h1>Shelf Search</h1>
     <div id="search" class="searchBar__container">
       <!-- form must include search bar, submit/button -->
-      <form class="searchBar__form" action="POST">
+      <form class="searchBar__form" >
         <!-- type of search -->
         <select name="searchType" id="searchType" class="searchBar__select">
-          <option value="title" >Title</option>
-          <option value="author">Author</option>
-          <option value="subject">Subject</option>
-          <option value="publisher">Publisher</option>
+          <option value="intitle:" >Title</option>
+          <option value="inauthor:">Author</option>
+          <option value="subject:">Subject</option>
+          <option value="inpublisher:">Publisher</option>
+          <option value="">Anywhere</option>
         </select>
 
         <!-- search and submit container -->
@@ -49,12 +50,19 @@
 
     <!-- Saved Bookshelf -->
     <div class="savedShelf__container">
-
+      <div class="savedShelf__bookContainer">
+      </div>
     </div>
-    <!-- My Shelf -->
+
+    <!-- Bestselling List -->
+    <!-- <div>
+    </div> -->
 
     <!-- A grid of search result books -->
     <div class="resultsDisplay__container">
+      <!-- search results go here -->
+      <div class="resultsDisplay__bookContainer">
+      </div>
     </div>
 
   </main>
