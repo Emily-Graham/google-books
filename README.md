@@ -19,4 +19,5 @@ To Do;
 Design is predominately greyscale to draw attention to the bookcovers and better reflect the user's taste. 
 Purple is used sparsely as a highlight for icons and interactive elements. 
 
-My figma design (that constantly changes): https://www.figma.com/file/yeMfLVakTRFSBXW97XrTly/Shelf-Search?node-id=0%3A1 
+My figma design (that constantly changes): <a href="https://www.figma.com/file/yeMfLVakTRFSBXW97XrTly/Shelf-Search?node-id=0%3A1">here</a>.
+Pelaicons sourced from PelaTeam, under CC4.0: <a href="https://www.figma.com/community/file/990314173893326792">here</a>.
